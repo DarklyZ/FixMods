@@ -16,6 +16,45 @@ repositories {
 	// Loom adds the essential maven repositories to download Minecraft and libraries from automatically.
 	// See https://docs.gradle.org/current/userguide/declaring_repositories.html
 	// for more information about repositories.
+	maven {
+		name = "Modrinth"
+		url = "https://api.modrinth.com/maven"
+		content {
+			includeGroup "maven.modrinth"
+		}
+	}
+	maven {
+		name = "JitPack"
+		url = 'https://jitpack.io'
+	}
+	maven {
+		name = "cardinal components, impersonate, player ability lib, trinkets"
+		url = "https://ladysnake.jfrog.io/artifactory/mods"
+	}
+	maven {
+		name = "impersonate"
+		url = "https://oss.sonatype.org/content/repositories/snapshots"
+	}
+	maven {
+		name = "reach entity attributes"
+		url = "https://maven.jamieswhiteshirt.com/libs-release"
+	}
+	maven {
+		name = "terraform wood api, trinkets"
+		url = "https://maven.terraformersmc.com"
+	}
+	maven {
+		name = "cloth config, rei"
+		url = "https://maven.shedaniel.me"
+	}
+	maven {
+		name = "patchouli"
+		url = "https://maven.blamejared.com"
+	}
+	maven {
+		name = "appleskin"
+		url = "https://maven.ryanliptak.com/"
+	}
 }
 
 dependencies {
@@ -27,7 +66,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-	// Uncomment the following line to enable the deprecated Fabric API modules. 
+	modImplementation "maven.modrinth:vivecraft:${project.vivecraft}"
+	modImplementation "com.github.DarklyZ:bewitchment:${project.bewitchment}"
+
+	// Uncomment the following line to enable the deprecated Fabric API modules.
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
