@@ -9,11 +9,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.vivecraft.api.VRData;
 import org.vivecraft.gameplay.VRPlayer;
 
-@Mixin(VRPlayer.class)
+@Mixin(value = VRPlayer.class, remap = false)
 public class VRPlayerMixin {
-	@Inject(at = @At("HEAD"), method = "doPermanantLookOverride", remap = false, cancellable = true)
+	private boolean NO_BROOM = false;
+
+	private boolean isBroomVehicle(ClientPlayerEntity entity) {
+		try { return !NO_BROOM && entity.getVehicle() instanceof BroomEntity; }
+		catch (NoClassDefFoundError e) { NO_BROOM = true; return false; }
+	}
+
+	@Inject(at = @At("HEAD"), method = "doPermanantLookOverride", cancellable = true)
 	private void doPermanantLookOverride(ClientPlayerEntity entity, VRData data, CallbackInfo info) {
-		if (entity != null && entity.getVehicle() instanceof BroomEntity) {
+		if (entity != null && isBroomVehicle(entity)) {
 			entity.setYaw(data.getController(1).getYaw());
 			entity.setHeadYaw(entity.getYaw());
 			entity.setPitch(-data.getController(1).getPitch());

@@ -28,5 +28,8 @@
     "minecraft": "~1.19.2",
     "java": ">=17"
   },
-  "suggests": {}
+  "suggests": {
+    "bewitchment": ">=1.19-6",
+    "vivecraft": ">=0.0.14"
+  }
 }
