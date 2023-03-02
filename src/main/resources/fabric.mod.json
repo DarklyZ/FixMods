@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "FixMods",
-  "description": "Fixes 'Bewitchment' and 'Vivecraft' compatibility",
+  "description": "Fixes 'Bewitchment', 'BewitchmentPlus', 'Vivecraft' compatibility",
   "authors": [
     "DarklyZ"
   ],

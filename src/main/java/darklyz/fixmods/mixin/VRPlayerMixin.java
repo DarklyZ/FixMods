@@ -11,9 +11,9 @@ import org.vivecraft.gameplay.VRPlayer;
 
 @Mixin(value = VRPlayer.class, remap = false)
 public class VRPlayerMixin {
-	private boolean NO_BROOM = false;
+	private static boolean NO_BROOM = false;
 
-	private boolean isBroomVehicle(ClientPlayerEntity entity) {
+	private static boolean isBroomVehicle(ClientPlayerEntity entity) {
 		try { return !NO_BROOM && entity.getVehicle() instanceof BroomEntity; }
 		catch (NoClassDefFoundError e) { NO_BROOM = true; return false; }
 	}
