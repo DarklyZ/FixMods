@@ -10,7 +10,7 @@ import org.vivecraft.api.VRData;
 import org.vivecraft.gameplay.VRPlayer;
 
 @Mixin(value = VRPlayer.class, remap = false)
-public class VRPlayerMixin {
+abstract class VRPlayerMixin {
 	private static boolean NO_BROOM = false;
 
 	private static boolean isBroomVehicle(ClientPlayerEntity entity) {
@@ -19,13 +19,13 @@ public class VRPlayerMixin {
 	}
 
 	@Inject(at = @At("HEAD"), method = "doPermanantLookOverride", cancellable = true)
-	private void doPermanantLookOverride(ClientPlayerEntity entity, VRData data, CallbackInfo info) {
-		if (entity != null && isBroomVehicle(entity)) {
-			entity.setYaw(data.getController(1).getYaw());
-			entity.setHeadYaw(entity.getYaw());
-			entity.setPitch(-data.getController(1).getPitch());
+	private void doPermanantLookOverride(ClientPlayerEntity entity, VRData data, CallbackInfo ci) {
+		if (entity == null || !isBroomVehicle(entity)) return;
 
-			info.cancel();
-		}
+		entity.setYaw(data.getController(1).getYaw());
+		entity.setHeadYaw(entity.getYaw());
+		entity.setPitch(-data.getController(1).getPitch());
+
+		ci.cancel();
 	}
 }
